@@ -1,0 +1,5 @@
+name: PixliesCore
+version: 1.0.0
+description: The brain behind the PixliesNet plugins
+api-version: 1.17
+authors: [MickMMars]
