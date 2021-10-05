@@ -1,12 +1,17 @@
 package net.pixlies.economy;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.pixlies.utils.Palette;
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
+@AllArgsConstructor
 public class Wallet {
 
     private String name;
@@ -45,6 +50,54 @@ public class Wallet {
             builder.append(ChatColor.RESET);
         }
         return builder.toString();
+    }
+
+    public Map<String, Object> mapForMongo() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("sign", sign);
+        map.put("balance", balance);
+        map.put("history", history);
+        map.put("prefix", prefix);
+        map.put("palette", new char[]{palette.getEffect().getChar(), palette.getPrimary().getChar(), palette.getAccent().getChar()});
+        return map;
+    }
+
+    public Wallet(Map<String, Object> mapped) {
+        this.name = (String) mapped.get("name");
+        this.sign = (String) mapped.get("sign");
+        this.balance = (double) mapped.get("balance");
+        this.history = (List<String>) mapped.get("history");
+        this.prefix = (boolean) mapped.get("prefix");
+        char[] paletteList = (char[]) mapped.get("palette");
+        this.palette = new Palette(ChatColor.getByChar(paletteList[0]), ChatColor.getByChar(paletteList[1]), ChatColor.getByChar(paletteList[2]));
+    }
+
+    public static Map<String, Wallet> getFromMongo(Map<String, Map<String, Object>> map) {
+        Map<String, Wallet> walletMap = new HashMap<>();
+        for (Map.Entry<String, Map<String, Object>> entry : map.entrySet())
+            walletMap.put(entry.getKey(), new Wallet(entry.getValue()));
+        return walletMap;
+    }
+
+    public static Map<String, Map<String, Object>> mapAllForMongo(Map<String, Wallet> walletMap) {
+        Map<String, Map<String, Object>> map = new HashMap<>();
+        for (Map.Entry<String, Wallet> entry : walletMap.entrySet())
+            map.put(entry.getKey(), entry.getValue().mapForMongo());
+        return map;
+    }
+
+    public static Map<String, Wallet> getDefaultWallets() {
+        Map<String, Wallet> wallets = new HashMap<>();
+        wallets.put("serverCurrency", new Wallet(
+                "Dollar",
+                "$",
+                0,
+                new ArrayList<>(),
+                true,
+                Palette.GREEN_THICK
+        ));
+        return wallets;
     }
 
 }
