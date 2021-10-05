@@ -25,8 +25,13 @@ public class User {
     private List<String> knownUsernames;
     private List<UUID> blockedUsers;
     private Map<String, Punishment> currentPunishments;
+    private String lang;
 
     public static User get(UUID uuid) {
+        return instance.getDatabase().getUserCache().getOrDefault(uuid, getFromDatabase(uuid));
+    }
+
+    public static User getFromDatabase(UUID uuid) {
         Document profile = new Document("uniqueId", uuid.toString());
         Document found = instance.getDatabase().getUserCollection().find(profile).first();
         User data;
@@ -37,6 +42,7 @@ public class User {
             profile.append("knownUsernames", new ArrayList<>());
             profile.append("blockedUsers", new ArrayList<>());
             profile.append("currentPunishments", new HashMap<>());
+            profile.append("lang", "ENG");
             instance.getDatabase().getUserCollection().insertOne(profile);
             data = new User(
                     uuid,
@@ -45,7 +51,8 @@ public class User {
                     Wallet.getDefaultWallets(),
                     new ArrayList<>(),
                     new ArrayList<>(),
-                    new HashMap<>()
+                    new HashMap<>(),
+                    "ENG"
             );
             Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Profile for " + uuid + " created in Database.");
         } else {
@@ -56,7 +63,8 @@ public class User {
                     Wallet.getFromMongo((Map<String, Map<String, Object>>) found.get("wallets", Map.class)),
                     found.getList("knownUsernames", String.class),
                     found.getList("blockedUsers", String.class).stream().map(UUID::fromString).collect(Collectors.toList()),
-                    Punishment.getFromMongo((Map<String, Map<String, Object>>) found.get("currentPunishments"))
+                    Punishment.getFromMongo((Map<String, Map<String, Object>>) found.get("currentPunishments")),
+                    found.getString("lang")
             );
         }
         return data;
@@ -75,6 +83,7 @@ public class User {
                 .collect(Collectors.toList())
         );
         profile.append("currentPunishments", Punishment.mapAllForMongo(currentPunishments));
+        profile.append("lang", lang);
         instance.getDatabase().getUserCollection().replaceOne(found, profile);
     }
 
