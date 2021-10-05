@@ -6,8 +6,13 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 import net.pixlies.Main;
+import net.pixlies.entity.User;
 import org.bson.Document;
 import org.bukkit.Bukkit;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Getter
 public class MongoDB {
@@ -16,7 +21,9 @@ public class MongoDB {
 
     private MongoClient client;
     private MongoDatabase database;
+
     private MongoCollection<Document> userCollection;
+    private final Map<UUID, User> userCache = new HashMap<>();
 
     public MongoDB init() {
         String uri = instance.getConfig().getString("mongodb-connectionstring");

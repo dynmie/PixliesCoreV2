@@ -1,6 +1,5 @@
 package net.pixlies.entity;
 
-import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.pixlies.Main;
@@ -77,6 +76,10 @@ public class User {
         );
         profile.append("currentPunishments", Punishment.mapAllForMongo(currentPunishments));
         instance.getDatabase().getUserCollection().replaceOne(found, profile);
+    }
+
+    public void save() {
+        instance.getDatabase().getUserCache().put(uuid, this);
     }
     
 }
