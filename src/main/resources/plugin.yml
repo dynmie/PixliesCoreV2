@@ -10,3 +10,4 @@ libraries:
     - org.mongodb:mongo-java-driver:3.12.3
     - org.projectlombok:lombok:1.18.20
     - com.github.stefvanschie.inventoryframework:IF:0.10.0
+    - commons-io:commons-io:2.11.0
