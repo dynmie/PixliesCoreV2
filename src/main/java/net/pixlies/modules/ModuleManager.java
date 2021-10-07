@@ -7,12 +7,9 @@ import lombok.SneakyThrows;
 import net.pixlies.Main;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.Validate;
-import org.bukkit.plugin.InvalidDescriptionException;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
@@ -24,7 +21,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 @Data
-@AllArgsConstructor
 public class ModuleManager {
 
     private static final Main instance = Main.getInstance();
@@ -69,7 +65,7 @@ public class ModuleManager {
                 modules.add(moduleInstance);
                 moduleDescriptions.put(infoJson.getName(), infoJson);
 
-                instance.onLoad();
+                moduleInstance.onLoad();
             } finally {
                 if (jar != null) {
                     try {
