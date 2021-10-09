@@ -27,6 +27,16 @@ public class User {
     private Map<String, Punishment> currentPunishments;
     private String lang;
 
+    public Punishment getBan() {
+        if (!currentPunishments.containsKey("ban")) return null;
+        Punishment punishment = currentPunishments.get("ban");
+        if (punishment.getUntil() - System.currentTimeMillis() <= 0) {
+            currentPunishments.remove("ban");
+            return null;
+        }
+        return punishment;
+    }
+
     public static User get(UUID uuid) {
         return instance.getDatabase().getUserCache().getOrDefault(uuid, getFromDatabase(uuid));
     }

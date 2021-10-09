@@ -1,7 +1,6 @@
 package net.pixlies.modules;
 
 import com.google.gson.Gson;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.SneakyThrows;
 import net.pixlies.Main;

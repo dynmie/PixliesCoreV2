@@ -1,18 +1,15 @@
 package net.pixlies.moderation;
 
 import lombok.Data;
-import net.pixlies.economy.Wallet;
-import net.pixlies.utils.Palette;
-import org.bukkit.ChatColor;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Data
 public class Punishment {
 
+    private String ID;
     private PunishmentType type;
     private UUID punisher;
     private long date;
@@ -20,6 +17,7 @@ public class Punishment {
     private long until;
 
     public Punishment(Map<String, Object> mapped) {
+        this.ID = (String)mapped.get("ID");
         this.type = PunishmentType.valueOf((String) mapped.get("type"));
         this.punisher = UUID.fromString((String) mapped.get("punisher"));
         this.date = (long) mapped.get("date");
@@ -36,6 +34,7 @@ public class Punishment {
 
     public Map<String, Object> mapForMongo() {
         Map<String, Object> map = new HashMap<>();
+        map.put("ID", ID);
         map.put("type", type.name());
         map.put("punisher", punisher.toString());
         map.put("date", date);

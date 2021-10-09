@@ -16,7 +16,9 @@ import java.util.Map;
 
 public enum Lang {
 
-    BAN_BASE("", new HashMap<>())
+    BAN_MESSAGE("", new HashMap<>()),
+    BANNED_PLAYER_TRIED_TO_JOIN(Lang.EARTH, new HashMap<>())
+
     ;
 
     private final String PREFIX;
@@ -66,6 +68,17 @@ public enum Lang {
 
     public void broadcast(Map<String, String> placeholders) {
         for (Player player : Bukkit.getOnlinePlayers()) {
+            String s = get(player);
+            for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                s = s.replace(entry.getKey(), entry.getValue());
+            }
+            player.sendMessage(s);
+        }
+    }
+
+    public void broadcast(Map<String, String> placeholders, String permission) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (!player.hasPermission(permission)) continue;
             String s = get(player);
             for (Map.Entry<String, String> entry : placeholders.entrySet()) {
                 s = s.replace(entry.getKey(), entry.getValue());
