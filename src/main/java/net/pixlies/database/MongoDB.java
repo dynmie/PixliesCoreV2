@@ -26,7 +26,7 @@ public class MongoDB {
     private final Map<UUID, User> userCache = new HashMap<>();
 
     public MongoDB init() {
-        String uri = instance.getConfig().getString("mongodb-connectionstring");
+        String uri = instance.getConfig().getString("database.uri");
         if (uri == null) {
             instance.getLogger().warning("Plugin can't start because MongoDB URI is missing.");
             Bukkit.getPluginManager().disablePlugin(instance);
@@ -37,7 +37,7 @@ public class MongoDB {
 
         database = client.getDatabase("admin");
 
-        userCollection = database.getCollection(instance.getConfig().getString("users-collection", "users"));
+        userCollection = database.getCollection(instance.getConfig().getString("database.users-collection", "users"));
 
         return this;
     }

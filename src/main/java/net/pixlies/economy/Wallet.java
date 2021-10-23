@@ -33,7 +33,7 @@ public class Wallet {
         return true;
     }
 
-    public String formatBalance() {
+    public String format(double amount) {
         StringBuilder builder = new StringBuilder();
         if (prefix) {
             builder.append(palette.getEffect());
@@ -42,7 +42,7 @@ public class Wallet {
             builder.append(ChatColor.RESET);
         }
         builder.append(palette.getPrimary());
-        builder.append(balance);
+        builder.append(amount);
         if (!prefix) {
             builder.append(palette.getEffect());
             builder.append(palette.getAccent());
@@ -50,6 +50,10 @@ public class Wallet {
             builder.append(ChatColor.RESET);
         }
         return builder.toString();
+    }
+
+    public String formatBalance() {
+        return format(balance);
     }
 
     public Map<String, Object> mapForMongo() {

@@ -43,7 +43,7 @@ public class ModuleManager {
 
             try {
                 jar = new JarFile(jarFile);
-                JarEntry entry = jar.getJarEntry("plugin.yml");
+                JarEntry entry = jar.getJarEntry("info.json");
 
                 if (entry == null) {
                     instance.getLogger().warning("Module " + jarFile.getName() + " does not contain info.json! Contact the developer to fix this issue ASAP.");

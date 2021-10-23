@@ -14,6 +14,8 @@ public class ListenerManager {
 
     private @Getter static final List<Listener> listeners = new ArrayList<>();
 
+    private ListenerManager() {}
+
     public static void registerAllListeners() {
         for (Listener listener : listeners) {
             Bukkit.getPluginManager().registerEvents(listener, instance);
