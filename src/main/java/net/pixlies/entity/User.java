@@ -48,7 +48,8 @@ public class User {
         return punishment;
     }
 
-    public Punishment ban(String reason, CommandSender punisher) {
+    //TODO: Broadcast
+    public Punishment ban(String reason, CommandSender punisher, boolean silent) {
         UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
         Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.BAN, punisherUUID, System.currentTimeMillis(), reason, 0);
         currentPunishments.put("ban", punishment);

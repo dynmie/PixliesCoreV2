@@ -2,3 +2,6 @@ database:
     type: "mongo"
     uri: ""
     users-collection: "users"
+
+moderation:
+    defaultReason: "No reason given."

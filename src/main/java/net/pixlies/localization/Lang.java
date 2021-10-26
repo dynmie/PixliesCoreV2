@@ -17,7 +17,12 @@ import java.util.Map;
 public enum Lang {
 
     BAN_MESSAGE("", new HashMap<>()),
-    BANNED_PLAYER_TRIED_TO_JOIN(Lang.EARTH, new HashMap<>())
+    BANNED_PLAYER_TRIED_TO_JOIN(Lang.EARTH, new HashMap<>()),
+
+
+
+
+    PLAYER_DOESNT_EXIST(Lang.EARTH, new HashMap<>())
 
     ;
 
