@@ -2,12 +2,19 @@ package net.pixlies.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.pixlies.Main;
 import net.pixlies.economy.Wallet;
 import net.pixlies.moderation.Punishment;
+import net.pixlies.moderation.PunishmentType;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerKickEvent;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,12 +34,26 @@ public class User {
     private Map<String, Punishment> currentPunishments;
     private String lang;
 
+    public OfflinePlayer getAsOfflinePlayer() {
+        return Bukkit.getOfflinePlayer(uuid);
+    }
+
     public Punishment getBan() {
         if (!currentPunishments.containsKey("ban")) return null;
         Punishment punishment = currentPunishments.get("ban");
         if (punishment.getUntil() - System.currentTimeMillis() <= 0) {
             currentPunishments.remove("ban");
             return null;
+        }
+        return punishment;
+    }
+
+    public Punishment ban(String reason, CommandSender punisher) {
+        UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
+        Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.BAN, punisherUUID, System.currentTimeMillis(), reason, 0);
+        currentPunishments.put("ban", punishment);
+        if (getAsOfflinePlayer().isOnline()) {
+            getAsOfflinePlayer().getPlayer().kick(Component.text("You have been banned.").color(NamedTextColor.RED), PlayerKickEvent.Cause.BANNED);
         }
         return punishment;
     }
@@ -53,7 +74,9 @@ public class User {
             profile.append("blockedUsers", new ArrayList<>());
             profile.append("currentPunishments", new HashMap<>());
             profile.append("lang", "ENG");
+
             instance.getDatabase().getUserCollection().insertOne(profile);
+
             data = new User(
                     uuid,
                     System.currentTimeMillis(),
@@ -64,6 +87,7 @@ public class User {
                     new HashMap<>(),
                     "ENG"
             );
+
             Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Profile for " + uuid + " created in Database.");
         } else {
             data = new User(
