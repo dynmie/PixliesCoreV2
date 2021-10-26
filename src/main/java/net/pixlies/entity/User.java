@@ -59,6 +59,17 @@ public class User {
         return punishment;
     }
 
+    //TODO: Broadcast
+    public Punishment tempBan(String reason, CommandSender punisher, long duration, boolean silent) {
+        UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
+        Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.BAN, punisherUUID, System.currentTimeMillis(), reason, duration + System.currentTimeMillis());
+        currentPunishments.put("ban", punishment);
+        if (getAsOfflinePlayer().isOnline()) {
+            getAsOfflinePlayer().getPlayer().kick(Component.text("You have been banned.").color(NamedTextColor.RED), PlayerKickEvent.Cause.BANNED);
+        }
+        return punishment;
+    }
+
     public static User get(UUID uuid) {
         return instance.getDatabase().getUserCache().getOrDefault(uuid, getFromDatabase(uuid));
     }

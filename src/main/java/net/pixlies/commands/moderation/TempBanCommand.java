@@ -8,18 +8,23 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.pixlies.Main;
 import net.pixlies.entity.User;
 import net.pixlies.localization.Lang;
+import net.pixlies.utils.TimeUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.ocpsoft.prettytime.PrettyTime;
 
-@CommandAlias("ban")
-@CommandPermission("pixlies.moderation.ban")
-public class BanCommand extends BaseCommand {
+import java.util.Date;
+
+@CommandAlias("tempban")
+@CommandPermission("pixlies.moderation.tempban")
+public class TempBanCommand extends BaseCommand {
 
     @CommandCompletion("@players")
-    @Description("Bans player with the default reason")
-    public static void onBan(CommandSender sender, String player, @Optional String reason) {
+    @Description("Temporarily bans player with the default reason")
+    public static void onTempBan(CommandSender sender, String player, String duration, @Optional String reason) {
         boolean silent = false;
+        long durationLong = TimeUnit.getDuration(duration);
         String banReason = Main.getInstance().getConfig().getString("moderation.defaultReason", "No reason given");
         if (reason != null && !reason.isEmpty()) {
             banReason = reason.replace("-s", "");
@@ -30,7 +35,7 @@ public class BanCommand extends BaseCommand {
         String banMessage = Lang.BAN_MESSAGE.get(sender)
                 .replace("%REASON%", banReason)
                 .replace("%BAN_ID%", "§cRejoin to find.")
-                .replace("%DURATION%", "§4§lPERMANENT!");
+                .replace("%DURATION%", new PrettyTime().format(new Date(durationLong + System.currentTimeMillis())));
 
         OfflinePlayer targetOP = Bukkit.getOfflinePlayerIfCached(player);
         if (targetOP == null) {
@@ -42,7 +47,7 @@ public class BanCommand extends BaseCommand {
             targetOP.getPlayer().kick(banKickMessage);
         }
         User user = User.get(targetOP.getUniqueId());
-        user.ban(banReason, sender, silent);
+        user.tempBan(banReason, sender, durationLong, silent);
     }
 
     @Default
@@ -51,6 +56,6 @@ public class BanCommand extends BaseCommand {
         help.showHelp();
     }
 
-    public BanCommand() {}
+    public TempBanCommand() {}
 
 }
