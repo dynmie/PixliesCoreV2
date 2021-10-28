@@ -7,5 +7,7 @@ BAN_MESSAGE: |-
     §7Ban-ID: §f%BAN_ID%
 
 BANNED_PLAYER_TRIED_TO_JOIN: '§6%PLAYER% §7tried to join, but they are banned!'
+PLAYER_PERMANENTLY_BANNED: '§6%PLAYER% §7has been banned by §6%EXECUTOR% §7for §c"%REASON%"'
+PLAYER_TEMPORARILY_BANNED: '§6%PLAYER% §7has been banned by §6%EXECUTOR% §7for §c"%REASON%" §7for §c%TIME%'
 
 PLAYER_DOESNT_EXIST: "§cThis player does not exist."

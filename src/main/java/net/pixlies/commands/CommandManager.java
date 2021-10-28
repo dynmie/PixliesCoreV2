@@ -5,6 +5,7 @@ import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
 import net.pixlies.Main;
 import net.pixlies.commands.moderation.BanCommand;
+import net.pixlies.commands.moderation.TempBanCommand;
 
 public class CommandManager {
 
@@ -14,12 +15,16 @@ public class CommandManager {
 
     public CommandManager() {
         this.pcm = new PaperCommandManager(instance);
+
         pcm.enableUnstableAPI("help");
         pcm.enableUnstableAPI("brigadier");
+
+        registerAllCommands();
     }
 
     public void registerAllCommands() {
         register(new BanCommand());
+        register(new TempBanCommand());
     }
 
     public void register(BaseCommand command) {

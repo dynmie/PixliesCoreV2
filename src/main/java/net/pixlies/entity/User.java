@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.pixlies.Main;
 import net.pixlies.economy.Wallet;
+import net.pixlies.localization.Lang;
 import net.pixlies.moderation.Punishment;
 import net.pixlies.moderation.PunishmentType;
 import org.bson.Document;
@@ -15,6 +16,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,9 +55,10 @@ public class User {
         UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
         Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.BAN, punisherUUID, System.currentTimeMillis(), reason, 0);
         currentPunishments.put("ban", punishment);
-        if (getAsOfflinePlayer().isOnline()) {
-            getAsOfflinePlayer().getPlayer().kick(Component.text("You have been banned.").color(NamedTextColor.RED), PlayerKickEvent.Cause.BANNED);
-        }
+        if (silent)
+            Lang.PLAYER_PERMANENTLY_BANNED.broadcastPermission("pixlies.moderation.silent", "%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason);
+        else
+            Lang.PLAYER_PERMANENTLY_BANNED.broadcast("%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason);
         return punishment;
     }
 
@@ -64,9 +67,10 @@ public class User {
         UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
         Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.BAN, punisherUUID, System.currentTimeMillis(), reason, duration + System.currentTimeMillis());
         currentPunishments.put("ban", punishment);
-        if (getAsOfflinePlayer().isOnline()) {
-            getAsOfflinePlayer().getPlayer().kick(Component.text("You have been banned.").color(NamedTextColor.RED), PlayerKickEvent.Cause.BANNED);
-        }
+        if (silent)
+            Lang.PLAYER_TEMPORARILY_BANNED.broadcastPermission("pixlies.moderation.silent", "%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason, "%TIME%;" + new PrettyTime().format(new Date(punishment.getUntil())));
+        else
+            Lang.PLAYER_TEMPORARILY_BANNED.broadcast("%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason, "%TIME%;" + new PrettyTime().format(new Date(punishment.getUntil())));
         return punishment;
     }
 

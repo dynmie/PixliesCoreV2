@@ -18,8 +18,8 @@ public enum Lang {
 
     BAN_MESSAGE("", new HashMap<>()),
     BANNED_PLAYER_TRIED_TO_JOIN(Lang.EARTH, new HashMap<>()),
-
-
+    PLAYER_PERMANENTLY_BANNED(Lang.EARTH, new HashMap<>()),
+    PLAYER_TEMPORARILY_BANNED(Lang.EARTH, new HashMap<>()),
 
 
     PLAYER_DOESNT_EXIST(Lang.EARTH, new HashMap<>())
@@ -95,6 +95,12 @@ public enum Lang {
     public void broadcast(String... placeholders) {
         for (Player player : Bukkit.getOnlinePlayers())
             send(player, placeholders);
+    }
+
+    public void broadcastPermission(String permission, String... placeholders) {
+        for (Player player : Bukkit.getOnlinePlayers())
+            if (player.hasPermission(permission))
+                send(player, placeholders);
     }
 
     public void setLanguage(Map<String, String> languages) {
