@@ -2,8 +2,6 @@ package net.pixlies.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.pixlies.Main;
 import net.pixlies.economy.Wallet;
 import net.pixlies.localization.Lang;
@@ -15,7 +13,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.*;
@@ -40,6 +37,38 @@ public class User {
         return Bukkit.getOfflinePlayer(uuid);
     }
 
+    public Punishment getMute() {
+        if (!currentPunishments.containsKey("mute")) return null;
+        Punishment punishment = currentPunishments.get("mute");
+        if (punishment.getUntil() - System.currentTimeMillis() <= 0) {
+            currentPunishments.remove("mute");
+            return null;
+        }
+        return punishment;
+    }
+
+    public Punishment mute(String reason, CommandSender punisher, boolean silent) {
+        UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
+        Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.MUTE, punisherUUID, System.currentTimeMillis(), reason, 0);
+        currentPunishments.put("mute", punishment);
+        if (silent)
+            Lang.PLAYER_PERMANENTLY_MUTED.broadcastPermission("pixlies.moderation.silent", "%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason);
+        else
+            Lang.PLAYER_PERMANENTLY_MUTED.broadcast("%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason);
+        return punishment;
+    }
+
+    public Punishment tempMute(String reason, CommandSender punisher, long duration, boolean silent) {
+        UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
+        Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.MUTE, punisherUUID, System.currentTimeMillis(), reason, duration + System.currentTimeMillis());
+        currentPunishments.put("mute", punishment);
+        if (silent)
+            Lang.PLAYER_TEMPORARILY_MUTED.broadcastPermission("pixlies.moderation.silent", "%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason, "%TIME%;" + new PrettyTime().format(new Date(punishment.getUntil())));
+        else
+            Lang.PLAYER_TEMPORARILY_MUTED.broadcast("%PLAYER%;" + this.getAsOfflinePlayer().getName(), "%EXECUTOR%;" + punisher.getName(), "%REASON%;" + reason, "%TIME%;" + new PrettyTime().format(new Date(punishment.getUntil())));
+        return punishment;
+    }
+
     public Punishment getBan() {
         if (!currentPunishments.containsKey("ban")) return null;
         Punishment punishment = currentPunishments.get("ban");
@@ -50,7 +79,6 @@ public class User {
         return punishment;
     }
 
-    //TODO: Broadcast
     public Punishment ban(String reason, CommandSender punisher, boolean silent) {
         UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
         Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.BAN, punisherUUID, System.currentTimeMillis(), reason, 0);
@@ -62,7 +90,6 @@ public class User {
         return punishment;
     }
 
-    //TODO: Broadcast
     public Punishment tempBan(String reason, CommandSender punisher, long duration, boolean silent) {
         UUID punisherUUID = punisher.getName().equalsIgnoreCase("console") ? UUID.fromString("f78a4d8d-d51b-4b39-98a3-230f2de0c670") : ((Player)punisher).getUniqueId();
         Punishment punishment = new Punishment(UUID.randomUUID().toString(), PunishmentType.BAN, punisherUUID, System.currentTimeMillis(), reason, duration + System.currentTimeMillis());

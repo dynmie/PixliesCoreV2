@@ -2,6 +2,7 @@ package net.pixlies.events.listeners;
 
 import lombok.Getter;
 import net.pixlies.Main;
+import net.pixlies.events.listeners.chat.ChatListener;
 import net.pixlies.events.listeners.join.LoginListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -15,6 +16,7 @@ public class ListenerManager {
 
     private @Getter static final List<Listener> listeners = new ArrayList<>(){{
         add(new LoginListener());
+        add(new ChatListener());
     }};
 
     private ListenerManager() {}

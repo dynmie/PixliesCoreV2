@@ -20,6 +20,9 @@ public enum Lang {
     BANNED_PLAYER_TRIED_TO_JOIN(Lang.EARTH, new HashMap<>()),
     PLAYER_PERMANENTLY_BANNED(Lang.EARTH, new HashMap<>()),
     PLAYER_TEMPORARILY_BANNED(Lang.EARTH, new HashMap<>()),
+    PLAYER_PERMANENTLY_MUTED(Lang.EARTH, new HashMap<>()),
+    PLAYER_TEMPORARILY_MUTED(Lang.EARTH, new HashMap<>()),
+    MUTE_MESSAGE("", new HashMap<>()),
 
 
     PLAYER_DOESNT_EXIST(Lang.EARTH, new HashMap<>())

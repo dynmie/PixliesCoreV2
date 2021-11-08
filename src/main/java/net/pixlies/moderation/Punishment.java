@@ -52,4 +52,13 @@ public class Punishment {
         return map;
     }
 
+    public boolean isPermanent() {
+        return until == 0;
+    }
+
+    public boolean isExpired() {
+        if (isPermanent()) return false;
+        return System.currentTimeMillis() - getUntil() <= 0;
+    }
+
 }

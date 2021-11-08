@@ -2,12 +2,16 @@ package net.pixlies.modules;
 
 import net.pixlies.Main;
 
-public interface Module {
+public class Module {
 
-    Main instance = Main.getInstance();
+    protected static final Main instance = Main.getInstance();
 
-    void onLoad();
+    public void onLoad() {
 
-    void onDrop();
+    }
+
+    public void onDrop() {
+
+    }
 
 }
