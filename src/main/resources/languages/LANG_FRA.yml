@@ -1,0 +1,16 @@
+BAN_MESSAGE: |-
+  §7Tu as été banni de §bPixlies§fNet§7.
+  
+  §7Raison: §c%REASON%
+  §7Duration: §b%DURATION%
+  
+  §7Ban-ID: §f%BAN_ID%
+
+BANNED_PLAYER_TRIED_TO_JOIN: '§6%PLAYER% §7a essayé à rejoigner, mais il est banni!'
+PLAYER_PERMANENTLY_BANNED: '§6%PLAYER% §7a été banni par §6%EXECUTOR% §7pour §c"%REASON%"'
+PLAYER_TEMPORARILY_BANNED: '§6%PLAYER% §7a été banni par §6%EXECUTOR% §7pour §c"%REASON%" §7pendant §c%TIME%'
+PLAYER_PERMANENTLY_MUTED: '§6%PLAYER% §7a été mis en sourdine par §6%EXECUTOR% §7pour §c"%REASON%"'
+PLAYER_TEMPORARILY_MUTED: '§6%PLAYER% §7a été mis en sourdine par §6%EXECUTOR% §7pour §c"%REASON%" §7pendant §c%TIME%'
+MUTE_MESSAGE: "§cTu as été mis en sourdine et ne peux donc pas écrire dans le chat"
+
+PLAYER_DOESNT_EXIST: "§cCe joueur n'existe pas."
