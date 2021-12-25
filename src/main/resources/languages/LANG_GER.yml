@@ -1,0 +1,16 @@
+BAN_MESSAGE: |-
+  §7Du wurdest von §bPixlies§fNet§7 gebannt!.
+  
+  §7Grund: §c%REASON%
+  §7Dauer: §b%DURATION%
+  
+  §7Ban-ID: §f%BAN_ID%
+
+BANNED_PLAYER_TRIED_TO_JOIN: '§6%PLAYER% §7versuchte zu joinen, ist aber gebannt!'
+PLAYER_PERMANENTLY_BANNED: '§6%PLAYER% §7wurde von §6%EXECUTOR% $7gebannt wegen §c"%REASON%"'
+PLAYER_TEMPORARILY_BANNED: '§6%PLAYER% §7wurde von §6%EXECUTOR% §7gebannt wegen §c"%REASON%" §7für §c%TIME%'
+PLAYER_PERMANENTLY_MUTED: '§6%PLAYER% §7wurde von §6%EXECUTOR% §7gemuted wegen §c"%REASON%"'
+PLAYER_TEMPORARILY_MUTED: '§6%PLAYER% §7wurde von §6%EXECUTOR% §7gemuted wegen §c"%REASON%" §7für §c%TIME%'
+MUTE_MESSAGE: "§cDu bist gemuted und kannst den Chat nicht nutzen."
+
+PLAYER_DOESNT_EXIST: "§cDieser Spieler existiert nicht."
