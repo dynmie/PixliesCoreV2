@@ -23,6 +23,7 @@ public enum Lang {
     PLAYER_PERMANENTLY_MUTED(Lang.EARTH, new HashMap<>()),
     PLAYER_TEMPORARILY_MUTED(Lang.EARTH, new HashMap<>()),
     MUTE_MESSAGE("", new HashMap<>()),
+    MUTED_PLAYER_TRIED_TO_TALK(Lang.EARTH, new HashMap<>()),
 
 
     PLAYER_DOESNT_EXIST(Lang.EARTH, new HashMap<>())
