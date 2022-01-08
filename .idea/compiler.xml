@@ -7,10 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PixliesCoreV2" />
+        <module name="NationModule" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="NationModule" target="16" />
       <module name="PixliesCoreV2" target="16" />
     </bytecodeTargetLevel>
   </component>
