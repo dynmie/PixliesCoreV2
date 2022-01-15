@@ -23,6 +23,7 @@ public class Main extends JavaPlugin {
 
         database = new MongoDB().init();
         moduleManager = new ModuleManager();
+        moduleManager.loadModules();
 
         ListenerManager.registerAllListeners();
         commandManager = new PaperCommandManager(instance);
