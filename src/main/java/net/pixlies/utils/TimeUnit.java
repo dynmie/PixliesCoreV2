@@ -10,6 +10,8 @@ public class TimeUnit {
     public static final long MONTH = DAY * 30;
     public static final long YEAR = DAY * 365;
 
+    private TimeUnit() {}
+
     public static long getDuration(String duration) {
         int multiplier = Integer.parseInt(duration.substring(0, duration.length() - 1));
         return switch (duration.substring(duration.length() - 1)) {

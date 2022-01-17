@@ -12,9 +12,6 @@ import net.pixlies.utils.TimeUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.ocpsoft.prettytime.PrettyTime;
-
-import java.util.Date;
 
 @CommandAlias("tempmute")
 @CommandPermission("pixlies.moderation.tempmute")
