@@ -25,6 +25,7 @@ public class CommandManager {
     }
 
     public void registerAllCommands() {
+        // MODERATION
         register(new BanCommand());
         register(new TempBanCommand());
         register(new MuteCommand());
