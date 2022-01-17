@@ -7,7 +7,6 @@ PixliesCoreV2 is a Spigot plugin that aims to be as modular as possible and brin
 ## Todo's
 - [X] Different wallets instead of single currency
 - [X] MongoDB connectivity
-- [ ] Module System
-- [ ] And much more that I can't think of rn ;D
+- [X] Module System
 - [ ] As fast as a rocket 🚀
-- [ ] Flexible and dynamic Command System
+- [ ] And much more that I can't think of rn ;D

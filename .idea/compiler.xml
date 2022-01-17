@@ -11,6 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="NationModule" target="16" />
       <module name="PixliesCoreV2" target="16" />
     </bytecodeTargetLevel>
   </component>
