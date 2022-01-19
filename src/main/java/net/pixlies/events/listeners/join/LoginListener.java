@@ -1,5 +1,6 @@
 package net.pixlies.events.listeners.join;
 
+import net.kyori.adventure.text.Component;
 import net.pixlies.entity.User;
 import net.pixlies.localization.Lang;
 import net.pixlies.moderation.Punishment;
@@ -25,13 +26,13 @@ public class LoginListener implements Listener {
                             .replace("%BAN_ID%", punishment.getID());
 
             if (punishment.getUntil() == 0) {
-                banMessage.replace("%DURATION%", "§4§lPERMANENT!");
+                banMessage = banMessage.replace("%DURATION%", "§4§lPERMANENT!");
             } else {
                 PrettyTime prettyTime = new PrettyTime();
-                banMessage.replace("%DURATION%", prettyTime.format(new Date(punishment.getUntil())));
+                banMessage = banMessage.replace("%DURATION%", prettyTime.format(new Date(punishment.getUntil())));
             }
 
-            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, banMessage);
+            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, Component.text(banMessage));
             Lang.BANNED_PLAYER_TRIED_TO_JOIN.broadcast(Collections.singletonMap("%PLAYER%", event.getPlayer().getName()), BAN_BROADCAST_PERMISSION);
         }
     }
