@@ -12,10 +12,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -34,7 +31,7 @@ public class ModuleManager {
         if (!modulesFolder.exists())
             modulesFolder.mkdir();
 
-        for (File jarFile : modulesFolder.listFiles()) {
+        for (File jarFile : Objects.requireNonNull(modulesFolder.listFiles())) {
             if (!jarFile.getName().endsWith(".jar")) continue;
             Validate.notNull(jarFile, "File cannot be null");
 
@@ -58,7 +55,7 @@ public class ModuleManager {
                         new URL[] {jarFile.toURI().toURL()},
                         this.getClass().getClassLoader()
                 );
-                Class<? extends Module> mainClass = (Class<? extends Module>) Class.forName(infoJson.getMain(), true, child);
+                Class<? extends Module> mainClass = Class.forName(infoJson.getMain(), true, child).asSubclass(Module.class);
                 Module moduleInstance = mainClass.getDeclaredConstructor().newInstance();
 
                 modules.add(moduleInstance);
