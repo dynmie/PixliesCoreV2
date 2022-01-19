@@ -51,6 +51,11 @@ public class ModuleManager {
 
                 ModuleDescription infoJson = new Gson().fromJson(IOUtils.toString(stream, StandardCharsets.UTF_8), ModuleDescription.class);
 
+                if (moduleDescriptions.containsKey(infoJson.getName())) {
+                    instance.getLogger().warning("Module " + infoJson.getName() + " v" + infoJson.getVersion() + " has already been loaded!");
+                    return;
+                }
+
                 URLClassLoader child = new URLClassLoader(
                         new URL[] {jarFile.toURI().toURL()},
                         this.getClass().getClassLoader()
