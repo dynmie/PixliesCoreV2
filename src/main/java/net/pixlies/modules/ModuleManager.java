@@ -43,7 +43,7 @@ public class ModuleManager {
                 JarEntry entry = jar.getJarEntry("info.json");
 
                 if (entry == null) {
-                    instance.getLogger().warning("Module " + jarFile.getName() + " does not contain info.json! Contact the developer to fix this issue ASAP.");
+                    instance.getLogger().severe("Module " + jarFile.getName() + " does not contain info.json! Contact the developer to fix this issue ASAP.");
                     return;
                 }
 
@@ -61,7 +61,15 @@ public class ModuleManager {
                 modules.add(moduleInstance);
                 moduleDescriptions.put(infoJson.getName(), infoJson);
 
-                moduleInstance.onLoad();
+
+                instance.getLogger().info("Loading module " + infoJson.getName() + " v" + infoJson.getVersion() + "...");
+                try {
+                    moduleInstance.onLoad();
+                    instance.getLogger().info("The module " + infoJson.getName() + " v" + infoJson.getVersion() + " has been successfully loaded!");
+                } catch (Exception e) {
+                    instance.getLogger().severe("Failed to load module " + infoJson.getName() + " v" + infoJson.getVersion() + "!");
+                    e.printStackTrace();
+                }
             } finally {
                 if (jar != null) {
                     try {
