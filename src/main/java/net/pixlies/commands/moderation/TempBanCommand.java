@@ -38,7 +38,7 @@ public class TempBanCommand extends BaseCommand {
                 .replace("%DURATION%", new PrettyTime().format(new Date(durationLong + System.currentTimeMillis())));
 
         OfflinePlayer targetOP = Bukkit.getOfflinePlayerIfCached(player);
-        if (targetOP == null) {
+        if (targetOP == null || targetOP.getPlayer() == null) {
             Lang.PLAYER_DOESNT_EXIST.send(sender);
             return;
         }

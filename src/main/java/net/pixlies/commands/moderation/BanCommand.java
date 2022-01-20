@@ -33,7 +33,7 @@ public class BanCommand extends BaseCommand {
                 .replace("%DURATION%", "§4§lPERMANENT!");
 
         OfflinePlayer targetOP = Bukkit.getOfflinePlayerIfCached(player);
-        if (targetOP == null) {
+        if (targetOP == null || targetOP.getPlayer() == null) {
             Lang.PLAYER_DOESNT_EXIST.send(sender);
             return;
         }
