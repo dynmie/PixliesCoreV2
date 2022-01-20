@@ -6,6 +6,7 @@ import lombok.SneakyThrows;
 import net.pixlies.Main;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.Validate;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,8 +22,7 @@ public class ModuleManager {
 
     private static final Main instance = Main.getInstance();
 
-    private List<Module> modules = new ArrayList<>();
-    private Map<String, ModuleDescription> moduleDescriptions = new HashMap<>();
+    private Map<Module, ModuleDescription> modules = new HashMap<>();
 
     @SneakyThrows
     public void loadModules() {
@@ -51,7 +51,7 @@ public class ModuleManager {
 
                 ModuleDescription infoJson = new Gson().fromJson(IOUtils.toString(stream, StandardCharsets.UTF_8), ModuleDescription.class);
 
-                if (moduleDescriptions.containsKey(infoJson.getName())) {
+                if (modules.containsValue(infoJson)) {
                     instance.getLogger().warning("Module " + infoJson.getName() + " v" + infoJson.getVersion() + " has already been loaded!");
                     return;
                 }
@@ -63,18 +63,18 @@ public class ModuleManager {
                 Class<? extends Module> mainClass = Class.forName(infoJson.getMain(), true, child).asSubclass(Module.class);
                 Module moduleInstance = mainClass.getDeclaredConstructor().newInstance();
 
-                modules.add(moduleInstance);
-                moduleDescriptions.put(infoJson.getName(), infoJson);
-
+                modules.put(moduleInstance, infoJson);
 
                 instance.getLogger().info("Loading module " + infoJson.getName() + " v" + infoJson.getVersion() + "...");
+
                 try {
                     moduleInstance.onLoad();
-                    instance.getLogger().info("The module " + infoJson.getName() + " v" + infoJson.getVersion() + " has been successfully loaded!");
+                    instance.getLogger().info("The module " + infoJson.getName() + " v" + infoJson.getVersion() + " has successfully loaded!");
                 } catch (Exception e) {
-                    instance.getLogger().severe("Failed to load module " + infoJson.getName() + " v" + infoJson.getVersion() + "!");
                     e.printStackTrace();
+                    instance.getLogger().severe("Failed to load module " + infoJson.getName() + " v" + infoJson.getVersion() + "!");
                 }
+
             } finally {
                 if (jar != null) {
                     try {
@@ -91,6 +91,38 @@ public class ModuleManager {
             }
         }
 
+    }
+
+    public void unloadModules() {
+        if (modules.isEmpty()) return;
+        for (Map.Entry<Module, ModuleDescription> entry : modules.entrySet()) {
+            Module module = entry.getKey();
+            ModuleDescription description = entry.getValue();
+            try {
+                module.onDrop();
+                instance.getLogger().info("The module " + description.getName() + " v" + description.getVersion() + " has successfully unloaded!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                instance.getLogger().severe("Module " + description.getName() + " v" + description.getVersion() + " encountered an error while unloading.");
+                return;
+            }
+        }
+    }
+
+    public ModuleDescription getDescription(Module module) {
+        if (modules.isEmpty()) return null;
+        return modules.get(module);
+    }
+
+    public Module getModule(String string) {
+        if (modules.isEmpty()) return null;
+        for (Map.Entry<Module, ModuleDescription> entry : modules.entrySet()) {
+            Module module = entry.getKey();
+            ModuleDescription description = entry.getValue();
+            if (!description.getName().equalsIgnoreCase(string)) continue;
+            return module;
+        }
+        return null;
     }
 
 }
