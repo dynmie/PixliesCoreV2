@@ -23,7 +23,7 @@ public class BanCommand extends BaseCommand {
         String banReason = Main.getInstance().getConfig().getString("moderation.defaultReason", "No reason given");
         if (reason != null && !reason.isEmpty()) {
             banReason = reason.replace("-s", "");
-            if (reason.endsWith("-s"))
+            if (reason.endsWith("-s") || reason.startsWith("-s"))
                 silent = true;
         }
 
@@ -33,7 +33,7 @@ public class BanCommand extends BaseCommand {
                 .replace("%DURATION%", "§4§lPERMANENT!");
 
         OfflinePlayer targetOP = Bukkit.getOfflinePlayerIfCached(player);
-        if (targetOP == null) {
+        if (targetOP == null || targetOP.getPlayer() == null) {
             Lang.PLAYER_DOESNT_EXIST.send(sender);
             return;
         }
