@@ -28,7 +28,7 @@ public class TempBanCommand extends BaseCommand {
         String banReason = Main.getInstance().getConfig().getString("moderation.defaultReason", "No reason given");
         if (reason != null && !reason.isEmpty()) {
             banReason = reason.replace("-s", "");
-            if (reason.endsWith("-s"))
+            if (reason.endsWith("-s") || reason.startsWith("-s"))
                 silent = true;
         }
 
