@@ -43,13 +43,18 @@ public class ModuleManager {
                 JarEntry entry = jar.getJarEntry("info.json");
 
                 if (entry == null) {
-                    instance.getLogger().warning("Module " + jarFile.getName() + " does not contain info.json! Contact the developer to fix this issue ASAP.");
+                    instance.getLogger().severe("Module " + jarFile.getName() + " does not contain info.json! Contact the developer to fix this issue ASAP.");
                     return;
                 }
 
                 stream = jar.getInputStream(entry);
 
                 ModuleDescription infoJson = new Gson().fromJson(IOUtils.toString(stream, StandardCharsets.UTF_8), ModuleDescription.class);
+
+                if (moduleDescriptions.containsKey(infoJson.getName())) {
+                    instance.getLogger().warning("Module " + infoJson.getName() + " v" + infoJson.getVersion() + " has already been loaded!");
+                    return;
+                }
 
                 URLClassLoader child = new URLClassLoader(
                         new URL[] {jarFile.toURI().toURL()},
@@ -61,7 +66,15 @@ public class ModuleManager {
                 modules.add(moduleInstance);
                 moduleDescriptions.put(infoJson.getName(), infoJson);
 
-                moduleInstance.onLoad();
+
+                instance.getLogger().info("Loading module " + infoJson.getName() + " v" + infoJson.getVersion() + "...");
+                try {
+                    moduleInstance.onLoad();
+                    instance.getLogger().info("The module " + infoJson.getName() + " v" + infoJson.getVersion() + " has been successfully loaded!");
+                } catch (Exception e) {
+                    instance.getLogger().severe("Failed to load module " + infoJson.getName() + " v" + infoJson.getVersion() + "!");
+                    e.printStackTrace();
+                }
             } finally {
                 if (jar != null) {
                     try {
