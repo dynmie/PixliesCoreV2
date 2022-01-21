@@ -124,4 +124,30 @@ public class ModuleManager {
         return null;
     }
 
+    public static boolean activateModule(Module module) {
+        if (module.getDescription().isActivated()) return false;
+        try {
+            module.onLoad();
+        } catch (Exception e) {
+            e.printStackTrace();
+            instance.getLogger().severe("Module " + module.getDescription().getName() + " v" + module.getDescription().getVersion() + " encountered an error on activation.");
+            return false;
+        }
+        module.getDescription().setActivated(true);
+        return true;
+    }
+
+    public static boolean deactivateModule(Module module) {
+        if (!module.getDescription().isActivated()) return false;
+        try {
+            module.onDrop();
+        } catch (Exception e) {
+            e.printStackTrace();
+            instance.getLogger().severe("Module " + module.getDescription().getName() + " v" + module.getDescription().getVersion() + " encountered an error on deactivation.");
+            return false;
+        }
+        module.getDescription().setActivated(false);
+        return true;
+    }
+
 }
