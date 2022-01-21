@@ -23,6 +23,7 @@ public class ModuleManager {
     private static final Main instance = Main.getInstance();
 
     private final Map<Module, ModuleDescription> modules = new HashMap<>();
+    private static final List<String> moduleList = new ArrayList<>();
 
     @SneakyThrows
     public void loadModules() {
@@ -70,6 +71,8 @@ public class ModuleManager {
                 try {
                     moduleInstance.onLoad();
                     instance.getLogger().info("The module " + infoJson.getName() + " v" + infoJson.getVersion() + " has successfully loaded!");
+                    moduleList.add(jarFile.getName());
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     instance.getLogger().severe("Failed to load module " + infoJson.getName() + " v" + infoJson.getVersion() + "!");
@@ -150,4 +153,7 @@ public class ModuleManager {
         return true;
     }
 
+    public static List<String> getModuleList() {
+        return moduleList;
+    }
 }

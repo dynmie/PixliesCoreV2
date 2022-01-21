@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
 import net.pixlies.Main;
+import net.pixlies.commands.debug.ListModulesCommand;
 import net.pixlies.commands.moderation.BanCommand;
 import net.pixlies.commands.moderation.MuteCommand;
 import net.pixlies.commands.moderation.TempBanCommand;
@@ -30,6 +31,9 @@ public class CommandManager {
         register(new TempBanCommand());
         register(new MuteCommand());
         register(new TempMuteCommand());
+
+        // DEBUG
+        register(new ListModulesCommand());
     }
 
     public void register(BaseCommand command) {
