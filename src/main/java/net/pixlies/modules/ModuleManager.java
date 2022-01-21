@@ -22,7 +22,7 @@ public class ModuleManager {
 
     private static final Main instance = Main.getInstance();
 
-    private Map<Module, ModuleDescription> modules = new HashMap<>();
+    private final Map<Module, ModuleDescription> modules = new HashMap<>();
 
     @SneakyThrows
     public void loadModules() {
@@ -104,7 +104,6 @@ public class ModuleManager {
             } catch (Exception e) {
                 e.printStackTrace();
                 instance.getLogger().severe("Module " + description.getName() + " v" + description.getVersion() + " encountered an error while unloading.");
-                return;
             }
         }
     }
@@ -123,6 +122,32 @@ public class ModuleManager {
             return module;
         }
         return null;
+    }
+
+    public static boolean activateModule(Module module) {
+        if (module.getDescription().isActivated()) return false;
+        try {
+            module.onLoad();
+        } catch (Exception e) {
+            e.printStackTrace();
+            instance.getLogger().severe("Module " + module.getDescription().getName() + " v" + module.getDescription().getVersion() + " encountered an error on activation.");
+            return false;
+        }
+        module.getDescription().setActivated(true);
+        return true;
+    }
+
+    public static boolean deactivateModule(Module module) {
+        if (!module.getDescription().isActivated()) return false;
+        try {
+            module.onDrop();
+        } catch (Exception e) {
+            e.printStackTrace();
+            instance.getLogger().severe("Module " + module.getDescription().getName() + " v" + module.getDescription().getVersion() + " encountered an error on deactivation.");
+            return false;
+        }
+        module.getDescription().setActivated(false);
+        return true;
     }
 
 }

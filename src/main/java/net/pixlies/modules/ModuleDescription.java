@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class ModuleDescription {
 
-    private String name;
-    private String[] authors;
-    private String version;
-    private String main;
+    private final String name;
+    private final String[] authors;
+    private final String version;
+    private final String main;
     private boolean activated;
 
     public ModuleDescription(String name, String[] authors, String version, String main) {
@@ -19,12 +19,12 @@ public class ModuleDescription {
         activated = true;
     }
 
-    public void deactivate() {
-        activated = false;
-    }
-
-    public void activate() {
-        activated = true;
+    /**
+     *  Do not set this from the description, use the module manager's methods instead.
+     * @param activated Set the activation status.
+     */
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
 }

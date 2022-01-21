@@ -1,4 +1,4 @@
-package net.pixlies.events.listeners.join;
+package net.pixlies.events.listeners.moderation;
 
 import net.kyori.adventure.text.Component;
 import net.pixlies.entity.User;
@@ -12,7 +12,7 @@ import org.ocpsoft.prettytime.PrettyTime;
 import java.util.Collections;
 import java.util.Date;
 
-public class LoginListener implements Listener {
+public class BanListener implements Listener {
 
     private static final String BAN_BROADCAST_PERMISSION = "earth.ban.broadcast";
 
