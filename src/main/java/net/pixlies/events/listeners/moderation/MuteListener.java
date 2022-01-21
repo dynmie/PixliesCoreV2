@@ -1,4 +1,4 @@
-package net.pixlies.events.listeners.chat;
+package net.pixlies.events.listeners.moderation;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.pixlies.entity.User;
@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
-public class ChatListener implements Listener {
+public class MuteListener implements Listener {
 
     private static final String MUTE_BROADCAST_PERMISSION = "earth.mute.broadcast";
 

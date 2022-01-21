@@ -7,7 +7,6 @@ import net.pixlies.events.listeners.ListenerManager;
 import net.pixlies.modules.ModuleManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//TODO
 public class Main extends JavaPlugin {
 
     private static @Getter Main instance;
