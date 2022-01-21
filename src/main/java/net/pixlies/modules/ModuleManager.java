@@ -22,7 +22,7 @@ public class ModuleManager {
 
     private static final Main instance = Main.getInstance();
 
-    private Map<Module, ModuleDescription> modules = new HashMap<>();
+    private final Map<Module, ModuleDescription> modules = new HashMap<>();
 
     @SneakyThrows
     public void loadModules() {
@@ -104,7 +104,6 @@ public class ModuleManager {
             } catch (Exception e) {
                 e.printStackTrace();
                 instance.getLogger().severe("Module " + description.getName() + " v" + description.getVersion() + " encountered an error while unloading.");
-                return;
             }
         }
     }
