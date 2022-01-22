@@ -2,6 +2,7 @@ package net.pixlies;
 
 import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
+import net.pixlies.commands.CommandManager;
 import net.pixlies.database.MongoDB;
 import net.pixlies.events.listeners.ListenerManager;
 import net.pixlies.modules.ModuleManager;
@@ -13,8 +14,7 @@ public class Main extends JavaPlugin {
 
     private @Getter MongoDB database;
     private @Getter ModuleManager moduleManager;
-    private @Getter PaperCommandManager commandManager;
-
+    private CommandManager commandManager;
 
     @Override
     public void onEnable() {
@@ -25,7 +25,7 @@ public class Main extends JavaPlugin {
         moduleManager.loadModules();
 
         ListenerManager.registerAllListeners();
-        commandManager = new PaperCommandManager(instance);
+        commandManager = new CommandManager();
     }
 
     @Override
