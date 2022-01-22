@@ -20,6 +20,7 @@ import java.util.Date;
 @CommandPermission("pixlies.moderation.tempban")
 public class TempBanCommand extends BaseCommand {
 
+    @Default
     @CommandCompletion("@players")
     @Description("Temporarily bans player with the default reason")
     public static void onTempBan(CommandSender sender, String player, String duration, @Optional String reason) {
@@ -50,7 +51,6 @@ public class TempBanCommand extends BaseCommand {
         user.tempBan(banReason, sender, durationLong, silent);
     }
 
-    @Default
     @HelpCommand
     public static void onHelp(CommandSender sender, CommandHelp help) {
         help.showHelp();

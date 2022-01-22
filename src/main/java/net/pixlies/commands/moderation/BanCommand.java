@@ -16,6 +16,7 @@ import org.bukkit.command.CommandSender;
 @CommandPermission("pixlies.moderation.ban")
 public class BanCommand extends BaseCommand {
 
+    @Default
     @CommandCompletion("@players")
     @Description("Bans player with the default reason")
     public static void onBan(CommandSender sender, String player, @Optional String reason) {
@@ -45,7 +46,6 @@ public class BanCommand extends BaseCommand {
         user.ban(banReason, sender, silent);
     }
 
-    @Default
     @HelpCommand
     public static void onHelp(CommandSender sender, CommandHelp help) {
         help.showHelp();

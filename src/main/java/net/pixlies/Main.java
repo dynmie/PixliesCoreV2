@@ -14,8 +14,7 @@ public class Main extends JavaPlugin {
 
     private @Getter MongoDB database;
     private @Getter ModuleManager moduleManager;
-    private @Getter CommandManager commandManager;
-
+    private CommandManager commandManager;
 
     @Override
     public void onEnable() {
