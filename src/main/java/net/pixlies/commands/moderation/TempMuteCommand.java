@@ -17,6 +17,7 @@ import org.bukkit.command.CommandSender;
 @CommandPermission("pixlies.moderation.tempmute")
 public class TempMuteCommand extends BaseCommand {
 
+    @Default
     @CommandCompletion("@players")
     @Description("Temporarily mutes player with the default reason")
     public static void onTempMute(CommandSender sender, String player, String duration, @Optional String reason) {
@@ -39,7 +40,6 @@ public class TempMuteCommand extends BaseCommand {
         user.tempMute(muteReason, sender, durationLong, silent);
     }
 
-    @Default
     @HelpCommand
     public static void onHelp(CommandSender sender, CommandHelp help) {
         help.showHelp();

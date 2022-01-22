@@ -14,6 +14,7 @@ import org.bukkit.command.CommandSender;
 @CommandPermission("pixlies.moderation.mute")
 public class MuteCommand extends BaseCommand {
 
+    @Default
     @CommandCompletion("@players")
     @Description("Mutes player with the default reason")
     public static void onBan(CommandSender sender, String player, @Optional String reason) {
@@ -35,7 +36,6 @@ public class MuteCommand extends BaseCommand {
         user.mute(muteReason, sender, silent);
     }
 
-    @Default
     @HelpCommand
     public static void onHelp(CommandSender sender, CommandHelp help) {
         help.showHelp();
