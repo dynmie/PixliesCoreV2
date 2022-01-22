@@ -6,7 +6,11 @@
 
     <groupId>net.pixlies</groupId>
     <artifactId>PixliesCoreV2</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>Nations</module>
+    </modules>
 
     <repositories>
         <repository>
