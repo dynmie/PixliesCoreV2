@@ -1,4 +1,4 @@
-package net.pixlies.core.events.listeners.moderation;
+package net.pixlies.core.listeners.moderation;
 
 import net.kyori.adventure.text.Component;
 import net.pixlies.core.localization.Lang;

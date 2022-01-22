@@ -4,7 +4,7 @@ import lombok.Getter;
 import net.pixlies.core.commands.CommandManager;
 import net.pixlies.core.database.MongoDB;
 import net.pixlies.core.modules.ModuleManager;
-import net.pixlies.core.events.listeners.ListenerManager;
+import net.pixlies.core.listeners.ListenerManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {

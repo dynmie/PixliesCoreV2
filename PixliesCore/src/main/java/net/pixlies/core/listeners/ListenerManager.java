@@ -1,9 +1,9 @@
-package net.pixlies.core.events.listeners;
+package net.pixlies.core.listeners;
 
 import lombok.Getter;
 import net.pixlies.core.Main;
-import net.pixlies.core.events.listeners.moderation.BanListener;
-import net.pixlies.core.events.listeners.moderation.MuteListener;
+import net.pixlies.core.listeners.moderation.BanListener;
+import net.pixlies.core.listeners.moderation.MuteListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 

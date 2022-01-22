@@ -1,4 +1,4 @@
-package net.pixlies.core.events.listeners.moderation;
+package net.pixlies.core.listeners.moderation;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.pixlies.core.localization.Lang;
