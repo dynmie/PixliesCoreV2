@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
 import net.pixlies.Main;
-import net.pixlies.commands.debug.ListModulesCommand;
+import net.pixlies.commands.debug.ModulesCommand;
 import net.pixlies.commands.moderation.BanCommand;
 import net.pixlies.commands.moderation.MuteCommand;
 import net.pixlies.commands.moderation.TempBanCommand;
@@ -17,7 +17,7 @@ public class CommandManager {
     private @Getter final PaperCommandManager pcm;
 
     public CommandManager() {
-        this.pcm = new PaperCommandManager(instance);
+        pcm = new PaperCommandManager(instance);
 
         pcm.enableUnstableAPI("help");
         pcm.enableUnstableAPI("brigadier");
@@ -33,7 +33,7 @@ public class CommandManager {
         register(new TempMuteCommand());
 
         // DEBUG
-        register(new ListModulesCommand());
+        register(new ModulesCommand());
     }
 
     public void register(BaseCommand command) {
