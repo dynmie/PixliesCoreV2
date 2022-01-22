@@ -5,6 +5,7 @@ import lombok.Getter;
 import net.pixlies.Main;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 public abstract class Module {
 
@@ -12,6 +13,7 @@ public abstract class Module {
     @Getter private final ModuleDescription description = Main.getInstance().getModuleManager().getDescription(this);
     @Getter(AccessLevel.PROTECTED) private final File moduleFolder = new File(
             Main.getInstance().getDataFolder().getAbsolutePath() + File.separator + "modules" + File.separator + description.getName());
+    @Getter(AccessLevel.PROTECTED) private final Logger logger = Logger.getLogger(description.getName());
 
     public abstract void onLoad();
 
