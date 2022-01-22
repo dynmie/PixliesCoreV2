@@ -8,12 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Nations" />
+        <module name="PixliesCoreV2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="NationModule" target="16" />
       <module name="Nations" target="16" />
       <module name="PixliesCoreV2" target="16" />
+      <module name="yourmom" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

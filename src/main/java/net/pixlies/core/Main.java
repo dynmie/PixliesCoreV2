@@ -11,11 +11,9 @@ public class Main extends JavaPlugin {
 
     private static @Getter Main instance;
 
-    private @Getter
-    MongoDB database;
-    private @Getter
-    ModuleManager moduleManager;
-    private CommandManager commandManager;
+    @Getter private MongoDB database;
+    @Getter private ModuleManager moduleManager;
+    @Getter private CommandManager commandManager;
 
     @Override
     public void onEnable() {
