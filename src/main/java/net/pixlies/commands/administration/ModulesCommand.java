@@ -17,7 +17,7 @@ public class ModulesCommand extends BaseCommand {
     // TODO: Add language support
     @Subcommand("list")
     @Description("Returns a list of all loaded Modules")
-    public void onList(CommandSender sender, String player, @Optional String reason) {
+    public void onList(CommandSender sender) {
         val modules = instance.getModuleManager().getModules();
         sender.sendMessage(CC.format("&b&lMODULES")); // could replace this
         modules.values().forEach(description -> {
@@ -28,7 +28,7 @@ public class ModulesCommand extends BaseCommand {
 
     @Default
     @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
+    public void onHelp(CommandHelp help) {
         help.showHelp();
     }
 
