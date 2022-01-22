@@ -99,11 +99,11 @@
                             <relocations>
                                 <relocation>
                                     <pattern>co.aikar.commands</pattern>
-                                    <shadedPattern>net.pixlies.acf</shadedPattern>
+                                    <shadedPattern>net.pixlies.core.acf</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>co.aikar.locales</pattern>
-                                    <shadedPattern>net.pixlies.locales</shadedPattern>
+                                    <shadedPattern>net.pixlies.core.locales</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
