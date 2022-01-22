@@ -1,6 +1,7 @@
 database:
     type: "mongo"
     uri: "mongodb://localhost:27017"
+    database: ""
     users-collection: "users"
 
 moderation:

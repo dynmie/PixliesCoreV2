@@ -35,7 +35,7 @@ public class MongoDB {
         MongoClientURI clientURI = new MongoClientURI(uri);
         client = new MongoClient(clientURI);
 
-        database = client.getDatabase("admin");
+        database = client.getDatabase(instance.getConfig().getString("database.database", "admin"));
 
         userCollection = database.getCollection(instance.getConfig().getString("database.users-collection", "users"));
 
