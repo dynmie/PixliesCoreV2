@@ -4,7 +4,7 @@ description: The brain behind the PixliesNet plugins
 api-version: 1.18
 authors: [MickMMars]
 website: www.pixlies.net
-main: net.pixlies.Main
+main: net.pixlies.core.Main
 prefix: Core
 libraries:
     - org.mongodb:mongo-java-driver:3.12.3
