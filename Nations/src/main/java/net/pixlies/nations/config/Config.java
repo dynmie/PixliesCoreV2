@@ -1,6 +1,7 @@
 package net.pixlies.nations.config;
 
 import net.pixlies.nations.Nations;
+import net.pixlies.nations.handlers.Handler;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,7 +13,7 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-public class Config extends YamlConfiguration {
+public class Config extends YamlConfiguration implements Handler {
 
     private static final Nations instance = Nations.getInstance();
 
