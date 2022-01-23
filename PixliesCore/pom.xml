@@ -16,14 +16,18 @@
 
     <repositories>
         <repository>
-            <id>purpur</id>
-            <url>https://repo.purpurmc.org/snapshots</url>
-        </repository>
-        <repository>
             <id>aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
     </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+        </dependency>
+    </dependencies>
 
     <pluginRepositories>
         <pluginRepository>
