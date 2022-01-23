@@ -16,11 +16,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-        </dependency>
-        <dependency>
             <groupId>org.purpurmc.purpur</groupId>
             <artifactId>purpur-api</artifactId>
             <version>1.18-R0.1-SNAPSHOT</version>
@@ -52,6 +47,13 @@
             <version>5.0.2.Final</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>purpur</id>
+            <url>https://repo.purpurmc.org/snapshots</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

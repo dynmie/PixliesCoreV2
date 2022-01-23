@@ -1,4 +1,4 @@
-package net.pixlies.nations.entities.nation.ranks;
+package net.pixlies.nations.nations.ranks;
 
 public enum Permission {
     INVITE,

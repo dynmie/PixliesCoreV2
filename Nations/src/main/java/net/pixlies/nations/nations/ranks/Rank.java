@@ -1,8 +1,7 @@
-package net.pixlies.nations.entities.nation.ranks;
+package net.pixlies.nations.nations.ranks;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import net.pixlies.nations.entities.nation.ranks.Permission;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,5 +1,7 @@
 package net.pixlies.nations.config;
 
-public class JsonData {
+import net.pixlies.nations.handlers.Handler;
+
+public class JsonData implements Handler {
     // TODO: Add JSON data saving stuff
 }

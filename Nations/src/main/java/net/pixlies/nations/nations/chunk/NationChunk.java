@@ -1,8 +1,7 @@
-package net.pixlies.nations.entities.chunk;
+package net.pixlies.nations.nations.chunk;
 
 import co.aikar.commands.lib.util.Table;
 import com.google.gson.JsonObject;
-import net.pixlies.nations.nations.Nation;
 
 import java.util.Map;
 
