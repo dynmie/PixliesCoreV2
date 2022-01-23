@@ -9,25 +9,39 @@ import net.pixlies.core.modules.Module;
 public class Nations extends Module {
 
     private static Nations instance;
+
     private HandlerManager handlerManager;
+    private ListenerManager listenerManager;
+    private CommandManager commandManager;
 
     @Override
     public void onLoad() {
         instance = this;
+
         handlerManager = new HandlerManager();
         new RegisterHandlerManager().registerAllHandlers();
-        new ListenerManager().registerAllListeners();
-        new CommandManager().registerAllCommands();
+
+        listenerManager = new ListenerManager();
+        listenerManager.registerAllListeners();
+
+        commandManager = new CommandManager();
+        commandManager.registerAllCommands();
+
     }
 
     @Override
     public void onDrop() {
+        listenerManager.unregisterAllListeners();
+        commandManager.unregisterAllCommands();
         instance = null;
-        handlerManager = null;
     }
 
     public HandlerManager getHandlerManager() {
         return handlerManager;
+    }
+
+    public ListenerManager getListenerManager() {
+        return listenerManager;
     }
 
     public static Nations getInstance() {
