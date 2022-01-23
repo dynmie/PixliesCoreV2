@@ -103,8 +103,8 @@ public class ModuleManager {
                 module.onDrop();
                 instance.getLogger().info("The module " + description.getName() + " v" + description.getVersion() + " has successfully unloaded!");
             } catch (Exception e) {
-                e.printStackTrace();
                 instance.getLogger().severe("Module " + description.getName() + " v" + description.getVersion() + " encountered an error while unloading.");
+                e.printStackTrace();
             }
         }
     }
