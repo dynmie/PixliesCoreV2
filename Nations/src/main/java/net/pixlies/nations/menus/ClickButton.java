@@ -1,5 +1,5 @@
 package net.pixlies.nations.menus;
 
-public interface MenuExecute {
+public interface ClickButton {
     void onExecute();
 }
