@@ -32,14 +32,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>co.aikar</groupId>
-            <artifactId>acf-paper</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
@@ -67,16 +59,6 @@
                         </goals>
                         <configuration>
                             <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
-                            <relocations>
-<!--                                <relocation>-->
-<!--                                    <pattern>co.aikar.commands</pattern>-->
-<!--                                    <shadedPattern>net.pixlies.acf</shadedPattern>-->
-<!--                                </relocation>-->
-<!--                                <relocation>-->
-<!--                                    <pattern>co.aikar.locales</pattern>-->
-<!--                                    <shadedPattern>net.pixlies.locales</shadedPattern>-->
-<!--                                </relocation>-->
-                            </relocations>
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
