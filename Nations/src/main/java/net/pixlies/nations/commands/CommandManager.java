@@ -16,4 +16,8 @@ public class CommandManager {
         commands.forEach(command -> Main.getInstance().getCommandManager().register(command));
     }
 
+    public void unregisterAllCommands() {
+        commands.forEach(command -> Main.getInstance().getCommandManager().unregister(command));
+    }
+
 }

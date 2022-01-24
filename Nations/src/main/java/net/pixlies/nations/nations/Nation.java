@@ -1,6 +1,5 @@
 package net.pixlies.nations.nations;
 
-import net.pixlies.nations.entities.NationsEntity;
 import net.pixlies.nations.nations.ranks.Rank;
 
 import java.util.Map;

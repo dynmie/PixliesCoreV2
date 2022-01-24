@@ -40,4 +40,8 @@ public class CommandManager {
         pcm.registerCommand(command);
     }
 
+    public void unregister(BaseCommand command) {
+        pcm.unregisterCommand(command);
+    }
+
 }
