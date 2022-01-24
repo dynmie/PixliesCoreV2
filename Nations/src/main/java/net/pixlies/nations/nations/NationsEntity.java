@@ -1,4 +1,4 @@
-package net.pixlies.nations.entities;
+package net.pixlies.nations.nations;
 
 public interface NationsEntity {
     String id();
