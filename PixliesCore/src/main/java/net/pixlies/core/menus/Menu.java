@@ -1,4 +1,4 @@
-package net.pixlies.nations.menus;
+package net.pixlies.core.menus;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;

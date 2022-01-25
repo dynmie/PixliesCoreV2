@@ -1,4 +1,4 @@
-package net.pixlies.nations.menus;
+package net.pixlies.core.menus;
 
 public interface ClickButton {
     void onExecute();
