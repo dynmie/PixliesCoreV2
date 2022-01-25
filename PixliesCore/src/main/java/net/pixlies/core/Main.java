@@ -40,6 +40,7 @@ public class Main extends JavaPlugin {
 
         ListenerManager.registerAllListeners();
         commandManager = new CommandManager();
+        commandManager.registerAllCommands();
     }
 
     @Override
