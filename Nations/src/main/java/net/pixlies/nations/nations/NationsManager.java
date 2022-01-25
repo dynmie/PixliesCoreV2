@@ -5,7 +5,7 @@ import net.pixlies.nations.handlers.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NationHandler implements Handler {
+public class NationsManager implements Handler {
 
     // TODO: Make the nation handler
 
