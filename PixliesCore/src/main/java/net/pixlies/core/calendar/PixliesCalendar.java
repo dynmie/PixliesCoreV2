@@ -5,9 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import net.pixlies.core.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;

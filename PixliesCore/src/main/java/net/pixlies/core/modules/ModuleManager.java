@@ -67,12 +67,16 @@ public class ModuleManager {
 
                 instance.getLogger().info("Loading module " + infoJson.getName() + " v" + infoJson.getVersion() + "...");
 
+                moduleInstance.init(infoJson);
+
                 try {
                     moduleInstance.onLoad();
+                    infoJson.setActivated(true);
                     instance.getLogger().info("The module " + infoJson.getName() + " v" + infoJson.getVersion() + " has successfully loaded!");
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    infoJson.setActivated(false);
                     instance.getLogger().severe("Failed to load module " + infoJson.getName() + " v" + infoJson.getVersion() + "!");
                 }
 

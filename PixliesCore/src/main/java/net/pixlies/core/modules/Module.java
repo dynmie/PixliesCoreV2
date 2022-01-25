@@ -9,14 +9,20 @@ import java.util.logging.Logger;
 
 public abstract class Module {
 
-    @Getter private final ModuleDescription description = Main.getInstance().getModuleManager().getDescription(this);
-    @Getter private final File moduleFolder = new File(
-            Main.getInstance().getDataFolder().getAbsolutePath() + File.separator + "modules" + File.separator + description.getName());
-    @Getter private final Logger logger = Logger.getLogger(description.getName());
+    @Getter private ModuleDescription description;
+    @Getter private File moduleFolder;
+    @Getter private Logger logger;
+
+    public void init(ModuleDescription description) {
+        this.description = description;
+        this.moduleFolder = new File(Main.getInstance().getDataFolder().getAbsolutePath() + File.separator + "modules" + File.separator + description.getName());
+        this.logger = Logger.getLogger(description.getName());
+    }
 
     public InputStream getResource(String string) {
         return this.getClass().getClassLoader().getResourceAsStream(string);
     }
+
 
     public abstract void onLoad();
 

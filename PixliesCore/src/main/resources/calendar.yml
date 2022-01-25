@@ -2,7 +2,7 @@ date: 1/1/0
 # TODO: implement events
 events:
     '12':
-       '24':
-       	  todo:
-            - "bc &cMerry Pixlies Christmas!"
-            - "eco give @a 20 Christmas money"
+        '24':
+            todo:
+                - "bc &cMerry Pixlies Christmas!"
+                - "eco give @a 20 Christmas money"
