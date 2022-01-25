@@ -5,41 +5,41 @@ import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.pixlies.core.Main;
 import net.pixlies.core.modules.ModuleDescription;
-import net.pixlies.core.modules.Module;
+import net.pixlies.core.utils.CC;
 import org.bukkit.command.CommandSender;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-@CommandAlias("modules")
+@CommandAlias("modules|modman")
 @CommandPermission("pixlies.debug.modules")
 public class ModulesCommand extends BaseCommand {
 
-    @Default
-    @CommandCompletion("")
+    private static final Main instance = Main.getInstance();
+
+    @Subcommand("list")
+    @CommandCompletion("@empty")
     @Description("Returns all loaded Modules")
-    public void onModules(CommandSender commandSender) {
-        commandSender.sendMessage("PixliesCoreV2 Modules: " + getModuleNames());
-    }
-
-    @HelpCommand
-    public void onHelp(CommandSender sender, CommandHelp help) {
-        help.showHelp();
-    }
-
-    public ModulesCommand() {
-
-    }
-
-    private Map<Module, ModuleDescription> modules = Main.getInstance().getModuleManager().getModules();
-
-    private List<String> getModuleNames() {
-        List<String> moduleNames = new ArrayList<>();
-        for(Map.Entry<Module, ModuleDescription> entry : modules.entrySet()) {
-            moduleNames.add(entry.getValue().getName());
+    @CommandPermission("pixlies.debug.modules.list")
+    public void onModules(CommandSender sender) {
+        sender.sendMessage("");
+        sender.sendMessage("&b&lMODULES");
+        for (ModuleDescription description : instance.getModuleManager().getModules().values()) {
+            sender.sendMessage(CC.format("&6" + description.getName() + " &7v" + description.getVersion()));
         }
-        return moduleNames;
+        sender.sendMessage("");
+    }
+
+    @Subcommand("reload")
+    @CommandCompletion("@empty")
+    @Description("Reloads all modules")
+    @CommandPermission("pixlies.debug.modules.reload")
+    public void onReload(CommandSender sender) {
+        instance.getModuleManager().reloadModules();
+        sender.sendMessage(CC.format("&7Reloaded all modules!"));
+    }
+
+    @Default
+    @HelpCommand
+    public void onHelp(CommandHelp help) {
+        help.showHelp();
     }
 
 }

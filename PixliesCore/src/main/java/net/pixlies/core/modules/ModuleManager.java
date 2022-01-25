@@ -109,6 +109,11 @@ public class ModuleManager {
         }
     }
 
+    public void reloadModules() {
+        unloadModules();
+        loadModules();
+    }
+
     public ModuleDescription getDescription(Module module) {
         if (modules.isEmpty()) return null;
         return modules.get(module);
