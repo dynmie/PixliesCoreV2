@@ -4,7 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 
-@CommandAlias("nation|n")
+@CommandAlias("nation|nations|n|faction|factions|f|country|countries")
 public class NationCommand extends BaseCommand {
 
     @Default
