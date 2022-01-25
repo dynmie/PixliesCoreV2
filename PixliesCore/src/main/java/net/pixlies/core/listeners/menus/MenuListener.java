@@ -30,12 +30,14 @@ public class MenuListener implements Listener {
 
     @EventHandler
     public void onDrag(InventoryDragEvent event) {
-        if (event.getInventory() instanceof Menu) event.setCancelled(true);
+        if (event.getInventory().getHolder() instanceof Menu) event.setCancelled(true);
     }
 
     @EventHandler
     public void onMove(InventoryMoveItemEvent event) {
-        if (event.getInitiator() instanceof Menu) event.setCancelled(true);
+        if (event.getInitiator().getHolder() instanceof Menu) event.setCancelled(true);
+        if (event.getDestination().getHolder() instanceof Menu) event.setCancelled(true);
+        if (event.getSource().getHolder() instanceof Menu) event.setCancelled(true);
     }
 
 }
