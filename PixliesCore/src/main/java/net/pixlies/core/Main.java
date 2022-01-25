@@ -35,12 +35,14 @@ public class Main extends JavaPlugin {
         calendar.startRunner();
 
         database = new MongoDB().init();
-        moduleManager = new ModuleManager();
-        moduleManager.loadModules();
 
         ListenerManager.registerAllListeners();
         commandManager = new CommandManager();
         commandManager.registerAllCommands();
+
+        moduleManager = new ModuleManager();
+        moduleManager.loadModules();
+
     }
 
     @Override
