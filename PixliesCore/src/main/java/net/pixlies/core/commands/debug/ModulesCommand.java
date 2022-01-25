@@ -20,7 +20,7 @@ public class ModulesCommand extends BaseCommand {
     @CommandPermission("pixlies.debug.modules.list")
     public void onModules(CommandSender sender) {
         sender.sendMessage("");
-        sender.sendMessage("&b&lMODULES");
+        sender.sendMessage(CC.format("&b&lMODULES"));
         for (ModuleDescription description : instance.getModuleManager().getModules().values()) {
             sender.sendMessage(CC.format("&6" + description.getName() + " &7v" + description.getVersion()));
         }
