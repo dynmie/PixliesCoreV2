@@ -8,6 +8,8 @@ public class Nation implements NationsEntity {
 
     private Map<String, Map<String, Object>> ranks;
 
+    private String name;
+
     public Nation create() {
         ranks.put("leader", Rank.LEADER().toMap());
         ranks.put("admin", Rank.ADMIN().toMap());
@@ -29,5 +31,13 @@ public class Nation implements NationsEntity {
     public String name() {
         return null;
     }
-    
+
+    public static Nation getById(String nationId) {
+        return null; // TODO
+    }
+
+    public String getName() {
+        return name;
+    }
+
 }

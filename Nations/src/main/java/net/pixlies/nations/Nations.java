@@ -1,5 +1,7 @@
 package net.pixlies.nations;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.pixlies.nations.commands.CommandManager;
 import net.pixlies.nations.events.ListenerManager;
 import net.pixlies.nations.handlers.HandlerManager;
@@ -13,6 +15,11 @@ public class Nations extends Module {
     private HandlerManager handlerManager;
     private ListenerManager listenerManager;
     private CommandManager commandManager;
+
+    private final Gson gson = new GsonBuilder()
+            .serializeNulls()
+            .setPrettyPrinting()
+            .create();
 
     @Override
     public void onLoad() {
@@ -42,6 +49,10 @@ public class Nations extends Module {
 
     public ListenerManager getListenerManager() {
         return listenerManager;
+    }
+
+    public Gson getGson() {
+        return gson;
     }
 
     public static Nations getInstance() {
