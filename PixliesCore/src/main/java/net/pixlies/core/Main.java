@@ -20,12 +20,14 @@ public class Main extends JavaPlugin {
     @Getter private CommandManager commandManager;
     @Getter private PixliesCalendar calendar;
 
+    @Getter private Config config;
     @Getter private Config calendarConfig;
 
     @Override
     public void onEnable() {
         instance = this;
 
+        config = new Config(new File(getDataFolder() + File.separator, "config.yml"), "config.yml");
         calendarConfig = new Config(new File(getDataFolder().getAbsolutePath() + "/calendar.yml"), "calendar.yml");
 
         String[] date = calendarConfig.getString("date", "0/0/0").split("/");
